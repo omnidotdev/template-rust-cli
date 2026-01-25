@@ -1,19 +1,19 @@
 [package]
-name = "{{project-name}}"
+name = "template-rust-cli"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.85"
 authors = ["Omni <team@omni.dev>"]
-description = "{{description}}"
+description = "Rust CLI template"
 license = "MIT"
-repository = "https://github.com/omnidotdev/{{project-name}}"
-homepage = "https://{{project-name}}.omni.dev"
+repository = "https://github.com/omnidotdev/template-rust-cli"
+homepage = "https://template-rust-cli.omni.dev"
 keywords = []
 categories = ["command-line-utilities", "development-tools"]
 readme = "README.md"
 
 [[bin]]
-name = "{{binary-name}}"
+name = "template-rust-cli"
 path = "src/main.rs"
 
 [dependencies]
