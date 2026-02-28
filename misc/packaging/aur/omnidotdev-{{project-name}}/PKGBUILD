@@ -1,0 +1,23 @@
+# Maintainer: Omni LLC <team@omni.dev>
+pkgname=omnidotdev-{{project-name}}
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="{{description}}"
+arch=('x86_64')
+url="https://{{binary-name}}.omni.dev"
+license=('MIT')
+depends=()
+makedepends=('cargo')
+source=("https://github.com/omnidotdev/{{project-name}}/archive/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "{{project-name}}-$pkgver"
+  cargo build --release
+}
+
+package() {
+  cd "{{project-name}}-$pkgver"
+  install -Dm755 "target/release/{{binary-name}}" "$pkgdir/usr/bin/{{binary-name}}"
+  install -Dm644 "LICENSE.md" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

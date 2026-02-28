@@ -1,84 +1,92 @@
-# 🦀 Rust CLI Template
+<div align="center">
+  <img src="/assets/logo.png" width="100" />
 
-This is a template repository for a command-line application built with Rust.
+  <h1 align="center">{{project-name}}</h1>
 
-## Features
+[Website](https://{{binary-name}}.omni.dev) | [Docs](https://docs.omni.dev/armory/{{project-name}}) | [Feedback](https://backfeed.omni.dev/workspaces/omni/projects/{{project-name}}) | [Discord](https://discord.gg/omnidotdev) | [X](https://x.com/omnidotdev)
 
-- 🚀 **Modern Stack**: Built with Rust 2024 edition for performance and safety
-- 🛠️ **CLI Framework**: [Clap](https://docs.rs/clap) with derive macros for ergonomic argument parsing
-- ⚠️ **Error Handling**: [thiserror](https://docs.rs/thiserror) for custom error types
-- 🔒 **Safety**:
-  - Unsafe code forbidden via lint
-  - Strict Clippy lints (pedantic, nursery, cargo)
-- ⚡ **Optimized Builds**:
-  - LTO (Link-Time Optimization) enabled
-  - Single codegen unit for maximum optimization
-  - Binary stripping for smaller size
-  - Panic abort for reduced binary size
-- 🛠️ **Developer Experience**:
-  - Comprehensive Clippy configuration
-  - Cargo metadata for crates.io publishing
-  - Easy spin up with [Tilt](https://tilt.dev)
+</div>
 
-## Prerequisites
-
-- [Rust](https://rustup.rs) 1.85+
-
-## Local Development
-
-### Installation
-
-```sh
-cargo build
-```
-
-### Running
-
-```sh
-cargo run -- --help
-```
-
-### Testing
-
-```sh
-cargo test
-```
-
-### Linting
-
-```sh
-cargo clippy
-```
+**{{project-name}}** is a command-line application built with Rust.
 
 ## Installation
 
-### From crates.io
+| Platform | Channel | Command / Link |
+| --- | --- | --- |
+| All | [GitHub Releases](https://github.com/omnidotdev/{{project-name}}/releases) | Download from releases page |
+| All | [crates.io](https://crates.io/crates/{{project-name}}) | `cargo install {{project-name}}` |
+| macOS / Linux | [Homebrew](https://github.com/omnidotdev/homebrew-tap/blob/master/Formula/{{binary-name}}.rb) | `brew install omnidotdev/tap/{{binary-name}}` |
+| Arch Linux | [AUR](https://aur.archlinux.org/packages/omnidotdev-{{project-name}}) / [AUR (bin)](https://aur.archlinux.org/packages/omnidotdev-{{project-name}}-bin) | `paru -S omnidotdev-{{project-name}}` or `paru -S omnidotdev-{{project-name}}-bin` |
 
-```sh
-cargo install {{project-name}}
+### Build from source
+
+```bash
+git clone https://github.com/omnidotdev/{{project-name}}
+cd {{project-name}}
+cargo build --release
+# Binary will be at target/release/{{binary-name}}
 ```
 
-### From source
-
-```sh
-cargo install --path .
-```
-
-## Usage
+## Quick Start
 
 ```sh
 {{binary-name}} --help
 ```
 
-## Publishing
+## Development
 
-1. Update version in `Cargo.toml`
-2. Update `CHANGELOG.md`
-3. Publish to crates.io:
+### Prerequisites
+
+- [Rust](https://rustup.rs) 1.85+
+- [Bun](https://bun.sh) 1.0+
+
+### Commands
 
 ```sh
-cargo publish
+cargo build          # Build
+cargo run -- --help  # Run
+cargo test           # Test
+cargo clippy         # Lint
 ```
+
+### Version Syncing
+
+This project uses a dual-package setup (Rust crate + npm package) with automated version synchronization:
+
+- **Source of truth**: `package.json` holds the canonical version, and is used for Changesets
+- **Sync script**: `scripts/syncVersion.ts` propagates the version to `Cargo.toml`
+- **Changesets**: Manages version bumps and changelog generation
+
+The sync script runs automatically during the release process via the `version` npm script:
+
+```sh
+bun run version  # syncs `package.json` version → `Cargo.toml`
+```
+
+### CI/CD
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `test.yml` | Push/PR to `master` | Runs fmt, clippy, and tests |
+| `sync.yml` | PR to `master` | Validates version sync, fmt, clippy, test, build |
+| `release.yml` | Push to `master` | Creates releases via Changesets, builds multi-platform binaries |
+
+### Release Process
+
+1. Create a changeset: `bun changeset`
+2. Push to `master`
+3. Changesets action creates a "Version Packages" PR
+4. Merge the PR to trigger a release with binaries for:
+   - `x86_64-unknown-linux-gnu`
+   - `aarch64-unknown-linux-gnu`
+   - `x86_64-apple-darwin`
+   - `aarch64-apple-darwin`
+5. **Manually** publish to crates.io: `cargo publish`
+
+## Ecosystem
+
+- **[Omni CLI](https://github.com/omnidotdev/cli)**: Agentic CLI for the Omni ecosystem
+- **[Omni Terminal](https://github.com/omnidotdev/terminal)**: GPU-accelerated terminal emulator built to run everywhere
 
 ## License
 
