@@ -152,7 +152,7 @@ jobs:
             desc "{{description}}"
             homepage "https://{{binary-name}}.omni.dev"
             version "${VERSION}"
-            license "MIT"
+            license "Apache-2.0"
 
             on_macos do
               on_arm do
