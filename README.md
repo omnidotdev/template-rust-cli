@@ -3,7 +3,7 @@
 
   <h1 align="center">{{project-name}}</h1>
 
-[Website](https://{{binary-name}}.omni.dev) | [Docs](https://docs.omni.dev/armory/{{project-name}}) | [Feedback](https://backfeed.omni.dev/workspaces/omni/projects/{{project-name}}) | [Discord](https://discord.gg/omnidotdev) | [X](https://x.com/omnidotdev)
+[Website](https://{{binary-name}}.omni.dev) | [Docs](https://docs.omni.dev/products/{{project-name}}) | [Feedback](https://backfeed.omni.dev/workspaces/omni/projects/{{project-name}}) | [Discord](https://discord.gg/omnidotdev) | [X](https://x.com/omnidotdev) | [Threads](https://www.threads.com/@omnidotdev)
 
 </div>
 
