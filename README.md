@@ -33,6 +33,21 @@ cargo build --release
 {{binary-name}} --help
 ```
 
+### Shell completions
+
+Generate a completion script for your shell and install it:
+
+```sh
+# zsh (a directory on your $fpath)
+{{binary-name}} completions zsh > ~/.zfunc/_{{binary-name}}
+# bash
+{{binary-name}} completions bash | sudo tee /etc/bash_completion.d/{{binary-name}}
+# fish
+{{binary-name}} completions fish > ~/.config/fish/completions/{{binary-name}}.fish
+```
+
+Supported shells: `bash`, `zsh`, `fish`, `elvish`, `powershell`.
+
 ## Development
 
 ### Prerequisites

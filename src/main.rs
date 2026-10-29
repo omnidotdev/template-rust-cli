@@ -1,6 +1,6 @@
 use std::process::ExitCode;
 
-use clap::{Parser, Subcommand};
+use clap::{CommandFactory, Parser, Subcommand};
 
 #[derive(Parser)]
 #[command(name = "{{binary-name}}")]
@@ -19,6 +19,11 @@ enum Commands {
         #[arg(short, long, default_value = "world")]
         name: String,
     },
+    /// Print a shell completion script (bash, zsh, fish, ...)
+    Completions {
+        /// Shell to generate completions for
+        shell: clap_complete::Shell,
+    },
 }
 
 fn main() -> ExitCode {
@@ -27,6 +32,12 @@ fn main() -> ExitCode {
     match cli.command {
         Commands::Hello { name } => {
             println!("Hello, {name}!");
+            ExitCode::SUCCESS
+        }
+        Commands::Completions { shell } => {
+            let mut cmd = Cli::command();
+            let name = cmd.get_name().to_string();
+            clap_complete::generate(shell, &mut cmd, name, &mut std::io::stdout());
             ExitCode::SUCCESS
         }
     }
