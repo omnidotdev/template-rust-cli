@@ -15,6 +15,6 @@ const updatedCargo = cargo.replace(
 
 await Bun.write("Cargo.toml", updatedCargo);
 
-console.log(`Synced version ${version} to Cargo.toml`);
+process.stdout.write(`Synced version ${version} to Cargo.toml\n`);
 
 export {};
